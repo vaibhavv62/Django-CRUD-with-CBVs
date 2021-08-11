@@ -1,0 +1,49 @@
+{% extends 'studentApp/layout.html' %}
+
+{% block title %}
+    <title>Show Students</title>
+{% endblock %}
+
+{% block content %}
+    <div class="container jumbotron">
+    <h1 style="text-align: center;">All Students</h1>
+    <br><br>
+        {% if object_list %}
+            <table class="table table-striped table-hover">
+                <tr class="thead-dark">
+                    <th>RollNo</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Marks</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                {% for student in object_list %}
+                    <tr>
+                        <td>{{student.rn}}</td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.city}}</td>
+                        <td>{{student.marks}}</td>
+                        <td><a href="{% url 'update' student.id %}"><button class="btn btn-warning">Update</button></a></td>
+                        <td><a href="{% url 'delete' student.id %}"><button class="btn btn-danger">Delete</button></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <a href="{% url 'create' %}">
+                <button class="btn btn-primary">
+                    Add Student
+                </button>
+            </a>
+        {% else %}
+            <h5>No records found, Please add few by hitting following button!</h5>
+            <br>
+            <a href="{% url 'create' %}">
+                <button class="btn btn-primary">
+                    Add Student
+                </button>
+            </a>
+        {% endif %}
+    </div>
+{% endblock %}
+        
